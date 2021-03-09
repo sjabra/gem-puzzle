@@ -1,0 +1,395 @@
+@font-face {
+  font: {
+    family: 'Junegull';
+    style: normal;
+    weight: 400;
+  }
+  src: local('Junegull'), local('Junegull-Regular'),
+    url(./assets/fonts/junegull.woff) format('woff'),
+    url(./assets/fonts/junegull.woff2) format('woff2');
+}
+
+$puzzle-background-color: #f5e2c4;
+$button-bg-color-hover: #d8aa7a;
+$button-border-color: #5f2e0f26;
+
+$menu-bg-color: rgba(78, 52, 34, 0.95);
+$menu-text-color: #fbeed9;
+$text-color: #5f2e0fc7;
+
+$breakpoint-screen-width-l: 620px;
+$breakpoint-screen-width-m: 560px;
+$breakpoint-screen-width-s: 510px;
+$breakpoint-screen-width-xs: 430px;
+$breakpoint-screen-width-xxs: 370px;
+
+$breakpoint-screen-height-l: 760px;
+$breakpoint-screen-height-m: 684px;
+$breakpoint-screen-height-s: 608px;
+$breakpoint-screen-height-xs: 560px;
+$breakpoint-screen-height-xxs: 532px;
+$breakpoint-screen-height-xxxs: 456px;
+
+html {
+  font: {
+    family: 'Junegull';
+    size: 10px;
+  }
+  box-sizing: border-box;
+
+  @media screen and (max-width: $breakpoint-screen-width-l),
+    (max-height: $breakpoint-screen-height-l) {
+    font-size: 9px;
+  }
+
+  @media screen and (max-width: $breakpoint-screen-width-m),
+    (max-height: $breakpoint-screen-height-m) {
+    font-size: 8px;
+  }
+
+  @media screen and (max-width: $breakpoint-screen-width-s),
+    (max-height: $breakpoint-screen-height-s) {
+    font-size: 7px;
+  }
+
+  @media screen and (max-width: $breakpoint-screen-width-xs),
+    (max-height: $breakpoint-screen-height-xs) {
+    font-size: 6px;
+  }
+
+  @media screen and (max-width: $breakpoint-screen-width-xxs),
+    (max-height: $breakpoint-screen-height-xxs) {
+    font-size: 5px;
+  }
+
+  @media screen and (max-height: $breakpoint-screen-height-xxxs) {
+    font-size: 4px;
+  }
+}
+
+@mixin background($imageUrl) {
+  background: {
+    image: url($imageUrl);
+    repeat: no-repeat;
+    size: cover;
+  }
+}
+
+@mixin tile-animated($translateX, $translateY) {
+  transform: translate($translateX, $translateY);
+  transition: 0.3s;
+}
+
+@mixin menu-text-wrapper() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 100%;
+
+  text-align: center;
+  font-size: 3rem;
+  color: $menu-text-color;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.disable-controls-bg {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.puzzle-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-height: 76rem;
+  min-width: 320px;
+
+  background-color: $puzzle-background-color;
+
+  .puzzle {
+    display: grid;
+    grid-template-columns: repeat(var(--tiles-count), 1fr);
+    grid-auto-rows: 1fr;
+
+    width: 60rem;
+    height: 60rem;
+    min-height: 60rem;
+    padding: 5rem;
+
+    position: relative;
+
+    @include background('./assets/images/background_sliding_puzzle-min.png');
+
+    &__menu {
+      position: absolute;
+      top: 3.5rem;
+      left: 3.4rem;
+
+      width: 53rem;
+      height: 53rem;
+
+      border-radius: 5rem;
+      background-color: $menu-bg-color;
+      z-index: 2;
+    }
+
+    &__win-wrapper {
+      @include menu-text-wrapper;
+
+      .win-header {
+        margin-bottom: 2rem;
+      }
+
+      .win-info {
+        padding: 0 7rem;
+        margin-bottom: 2rem;
+      }
+
+      .win-button {
+        &:hover,
+        &:active,
+        &:focus {
+          cursor: pointer;
+  
+          color: $menu-bg-color;
+          background-color: $menu-text-color;
+        }
+      }
+    }
+
+    &__save-wrapper {
+      @include menu-text-wrapper;
+      align-items: center;
+    }
+
+    &__new-game-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      height: 100%;
+    }
+
+    &__game-types {
+      display: flex;
+      justify-content: space-evenly;
+
+      width: 100%;
+      margin-bottom: 1rem;
+
+      font-size: 5rem;
+      color: $menu-text-color;
+    }
+
+    &__game-type {
+      &:hover,
+      &:active,
+      &:focus,
+      &.active {
+        cursor: pointer;
+
+        color: $menu-bg-color;
+        background-color: $menu-text-color;
+      }
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+
+      list-style: none;
+      font-size: 5rem;
+      color: $menu-text-color;
+
+      &-load,
+      &-leaderboard {
+        justify-content: center;
+        height: 100%;
+
+        list-style: decimal;
+        list-style-position: inside;
+      }
+
+      &-item {
+        width: 100%;
+        text-align: center;
+
+        &-load,
+        &-leaderboard {
+          font-size: 3.2rem;
+
+          &-back {
+            list-style: none;
+          }
+        }
+
+        &-hover-allow {
+          &:hover,
+          &:active,
+          &:focus {
+            cursor: pointer;
+
+            color: $menu-bg-color;
+            background-color: $menu-text-color;
+          }
+        }
+      }
+    }
+
+    &__progress-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 50rem;
+      margin: 1rem 0;
+      font-size: 2.5rem;
+
+      @media screen and (max-width: $breakpoint-screen-width-xxs),
+        (max-height: $breakpoint-screen-height-xxs) {
+        font-size: 2.8rem;
+      }
+
+      @media screen and (max-height: $breakpoint-screen-height-xxxs) {
+        font-size: 3.5rem;
+      }
+
+      color: $text-color;
+
+      & div {
+        flex-basis: 33%;
+        padding-left: 3.3rem;
+        text-align: left;
+      }
+    }
+
+    &__time {
+      @media screen and (max-width: $breakpoint-screen-width-xxs),
+        (max-height: $breakpoint-screen-height-xxxs) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    &__moves {
+      @media screen and (max-width: $breakpoint-screen-width-xxs),
+        (max-height: $breakpoint-screen-height-xxxs) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    &__sound-switcher {
+      display: flex;
+      align-items: center;
+
+      &:hover,
+      &:focus,
+      &:active {
+        cursor: pointer;
+      }
+    }
+
+    &__tile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover,
+      &:focus,
+      &:active {
+        cursor: pointer;
+      }
+
+      @include background('./assets/images/tile_sliding_puzzle-min.png');
+
+      &-top {
+        @include tile-animated(0, -100%);
+      }
+
+      &-bottom {
+        @include tile-animated(0, 100%);
+      }
+
+      &-right {
+        @include tile-animated(100%, 0);
+      }
+
+      &-left {
+        @include tile-animated(-100%, 0);
+      }
+    }
+
+    &__buttons-wrapper {
+      display: flex;
+      width: 50rem;
+      justify-content: space-between;
+
+      margin: 2rem 0 1rem;
+    }
+
+    &__button {
+      width: 9.7rem;
+      height: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      border-radius: 1rem;
+      font-size: 2.5rem;
+
+      @media screen and (max-width: $breakpoint-screen-width-xxs),
+        (max-height: $breakpoint-screen-height-xxs) {
+        height: 6rem;
+        font-size: 2.8rem;
+      }
+
+      @media screen and (max-height: $breakpoint-screen-height-xxxs) {
+        height: 7rem;
+        font-size: 3.5rem;
+      }
+
+      color: $text-color;
+      border: 0.2rem solid $button-border-color;
+
+      &:hover,
+      &:active,
+      &:focus {
+        cursor: pointer;
+        background-color: $button-bg-color-hover;
+      }
+    }
+
+    &__img {
+      width: 90%;
+      height: auto;
+      filter: drop-shadow(1px 0.1rem 1px rgba(0, 0, 0, 0.8));
+    }
+
+    &__picture {
+      width: 90%;
+      height: 90%;
+      border-radius: 1rem;
+      background-size: 60rem 60rem;
+    }
+  }
+}

@@ -1,0 +1,342 @@
+@font-face {
+  font-family: 'Junegull';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Junegull"), local("Junegull-Regular"), url(./assets/fonts/junegull.woff) format("woff"), url(./assets/fonts/junegull.woff2) format("woff2");
+}
+
+html {
+  font-family: 'Junegull';
+  font-size: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+@media screen and (max-width: 620px), (max-height: 760px) {
+  html {
+    font-size: 9px;
+  }
+}
+
+@media screen and (max-width: 560px), (max-height: 684px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media screen and (max-width: 510px), (max-height: 608px) {
+  html {
+    font-size: 7px;
+  }
+}
+
+@media screen and (max-width: 430px), (max-height: 560px) {
+  html {
+    font-size: 6px;
+  }
+}
+
+@media screen and (max-width: 370px), (max-height: 532px) {
+  html {
+    font-size: 5px;
+  }
+}
+
+@media screen and (max-height: 456px) {
+  html {
+    font-size: 4px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.puzzle-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  min-height: 76rem;
+  min-width: 320px;
+  background-color: #f5e2c4;
+}
+
+.puzzle-wrapper .puzzle {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[var];
+      grid-template-columns: repeat(var(--tiles-count), 1fr);
+  grid-auto-rows: 1fr;
+  width: 60rem;
+  height: 60rem;
+  min-height: 60rem;
+  padding: 5rem;
+  position: relative;
+  background-image: url("./assets/images/background_sliding_puzzle-min.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.puzzle-wrapper .puzzle__menu {
+  position: absolute;
+  top: 3.5rem;
+  left: 3.4rem;
+  width: 53rem;
+  height: 53rem;
+  border-radius: 5rem;
+  background-color: rgba(78, 52, 34, 0.95);
+  z-index: 1;
+}
+
+.puzzle-wrapper .puzzle__win-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+  text-align: center;
+  font-size: 3rem;
+  color: #fbeed9;
+}
+
+.puzzle-wrapper .puzzle__win-wrapper .win-info {
+  padding: 0 7rem;
+}
+
+.puzzle-wrapper .puzzle__win-wrapper .win-header {
+  margin-bottom: 2rem;
+}
+
+.puzzle-wrapper .puzzle__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 5rem;
+  color: #fbeed9;
+}
+
+.puzzle-wrapper .puzzle__list-item {
+  width: 100%;
+  text-align: center;
+}
+
+.puzzle-wrapper .puzzle__list-item:hover, .puzzle-wrapper .puzzle__list-item:active, .puzzle-wrapper .puzzle__list-item:focus {
+  cursor: pointer;
+  color: rgba(78, 52, 34, 0.95);
+  background-color: #fbeed9;
+}
+
+.puzzle-wrapper .puzzle__progress-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50rem;
+  margin: 1rem 0;
+  font-size: 2.5rem;
+  color: #5f2e0fc7;
+}
+
+@media screen and (max-width: 370px), (max-height: 532px) {
+  .puzzle-wrapper .puzzle__progress-wrapper {
+    font-size: 2.8rem;
+  }
+}
+
+@media screen and (max-height: 456px) {
+  .puzzle-wrapper .puzzle__progress-wrapper {
+    font-size: 3.5rem;
+  }
+}
+
+.puzzle-wrapper .puzzle__progress-wrapper div {
+  -ms-flex-preferred-size: 33%;
+      flex-basis: 33%;
+  padding-left: 3.3rem;
+  text-align: left;
+}
+
+@media screen and (max-width: 370px), (max-height: 456px) {
+  .puzzle-wrapper .puzzle__time {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 370px), (max-height: 456px) {
+  .puzzle-wrapper .puzzle__moves {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.puzzle-wrapper .puzzle__sound-switcher {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.puzzle-wrapper .puzzle__sound-switcher:hover, .puzzle-wrapper .puzzle__sound-switcher:focus, .puzzle-wrapper .puzzle__sound-switcher:active {
+  cursor: pointer;
+}
+
+.puzzle-wrapper .puzzle__tile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-image: url("./assets/images/tile_sliding_puzzle-min.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.puzzle-wrapper .puzzle__tile:hover, .puzzle-wrapper .puzzle__tile:focus, .puzzle-wrapper .puzzle__tile:active {
+  cursor: pointer;
+}
+
+.puzzle-wrapper .puzzle__tile-top {
+  -webkit-transform: translate(0, -100%);
+          transform: translate(0, -100%);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.puzzle-wrapper .puzzle__tile-bottom {
+  -webkit-transform: translate(0, 100%);
+          transform: translate(0, 100%);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.puzzle-wrapper .puzzle__tile-right {
+  -webkit-transform: translate(100%, 0);
+          transform: translate(100%, 0);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.puzzle-wrapper .puzzle__tile-left {
+  -webkit-transform: translate(-100%, 0);
+          transform: translate(-100%, 0);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.puzzle-wrapper .puzzle__buttons-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 50rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 2rem 0 1rem;
+}
+
+.puzzle-wrapper .puzzle__button {
+  width: 12.3rem;
+  height: 5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  border-radius: 1rem;
+  font-size: 2.5rem;
+  color: #5f2e0fc7;
+  border: 0.2rem solid #5f2e0f26;
+}
+
+@media screen and (max-width: 370px), (max-height: 532px) {
+  .puzzle-wrapper .puzzle__button {
+    height: 6rem;
+    font-size: 2.8rem;
+  }
+}
+
+@media screen and (max-height: 456px) {
+  .puzzle-wrapper .puzzle__button {
+    height: 7rem;
+    font-size: 3.5rem;
+  }
+}
+
+.puzzle-wrapper .puzzle__button:hover, .puzzle-wrapper .puzzle__button:active, .puzzle-wrapper .puzzle__button:focus {
+  cursor: pointer;
+  background-color: #d8aa7a;
+}
+
+.puzzle-wrapper .puzzle__img {
+  width: 90%;
+  height: auto;
+  -webkit-filter: drop-shadow(1px 0.1rem 1px rgba(0, 0, 0, 0.8));
+          filter: drop-shadow(1px 0.1rem 1px rgba(0, 0, 0, 0.8));
+}
+/*# sourceMappingURL=style.css.map */
